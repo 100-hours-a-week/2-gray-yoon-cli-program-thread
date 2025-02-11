@@ -27,5 +27,7 @@ public class Payment {
         if (amount > price) {
             System.out.println("거스름돈 " + (amount - price) + "원입니다.");
         }
+
+        System.out.println();
     }
 }

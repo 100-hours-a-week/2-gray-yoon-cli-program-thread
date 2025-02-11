@@ -1,10 +1,11 @@
 package cafe.order;
 
+import cafe.employee.Employee;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Order {
-    private List<OrderItem> orders = new ArrayList<>();
+    private ArrayList<OrderItem> orders = new ArrayList<>();
 
     public void addItem(OrderItem item) {
         orders.add(item);
@@ -38,5 +39,21 @@ public class Order {
 
     public int getOrdersCount() {
         return orders.size();
+    }
+
+    public void makeOrders() {
+        int mid = orders.size() / 2;
+        Thread employee1 = new Thread(new Employee(0, orders.subList(0, mid)));
+        Thread employee2 = new Thread(new Employee(mid, orders.subList(mid, orders.size())));
+
+        employee1.start();
+        employee2.start();
+
+        try {
+            employee1.join();
+            employee2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

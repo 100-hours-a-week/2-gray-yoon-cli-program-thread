@@ -16,6 +16,9 @@ public class Main {
         // 계산 (지불 및 거스름돈)
         cafe.calculatePayment();
 
+        // 만들기
+        cafe.make();
+
         // 인사
         cafe.close();
     }
