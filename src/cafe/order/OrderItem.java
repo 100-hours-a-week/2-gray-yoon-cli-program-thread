@@ -15,9 +15,9 @@ public class OrderItem {
         return count * item.getPrice();
     }
 
-    public void makeItem(int index) {
-        System.out.println("[" + index + "번 메뉴] " + item.getName() + "을(를) 만드는 중...");
-        System.out.println("[" + index + "번 메뉴] " + item.getName() + "을(를) 완성했습니다!");
+    public void makeItem(int orderNumber) {
+        System.out.println("[주문번호: " + orderNumber + "] " + item.getName() + "을(를) 만드는 중...");
+        System.out.println("[주문번호: " + orderNumber + "] " + item.getName() + "을(를) 완성했습니다!");
     }
 
     @Override

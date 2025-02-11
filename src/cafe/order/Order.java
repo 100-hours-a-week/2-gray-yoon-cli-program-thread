@@ -1,7 +1,5 @@
 package cafe.order;
 
-import cafe.employee.Employee;
-
 import java.util.ArrayList;
 
 public class Order {
@@ -41,19 +39,7 @@ public class Order {
         return orders.size();
     }
 
-    public void makeOrders() {
-        int mid = orders.size() / 2;
-        Thread employee1 = new Thread(new Employee(0, orders.subList(0, mid)));
-        Thread employee2 = new Thread(new Employee(mid, orders.subList(mid, orders.size())));
-
-        employee1.start();
-        employee2.start();
-
-        try {
-            employee1.join();
-            employee2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public ArrayList<OrderItem> getOrders() {
+        return orders;
     }
 }

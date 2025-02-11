@@ -1,5 +1,6 @@
 package cafe;
 
+import cafe.employee.Employees;
 import cafe.menu.Menu;
 import cafe.menu.MenuItem;
 import cafe.menu.MenuList;
@@ -9,6 +10,7 @@ import cafe.order.OrderItem;
 import cafe.order.Payment;
 
 public class Cafe {
+    private Employees employees = new Employees();
     private final Menu menu = new Menu();
     private final Order orders = new Order();
 
@@ -62,7 +64,7 @@ public class Cafe {
     }
 
     public void make() {
-        orders.makeOrders();
+        employees.makeOrders(orders.getOrders());
     }
 
     public void close() {
