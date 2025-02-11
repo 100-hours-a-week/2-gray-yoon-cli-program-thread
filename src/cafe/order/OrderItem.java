@@ -17,6 +17,9 @@ public class OrderItem {
 
     public void makeItem(int orderNumber) {
         System.out.println("[주문번호: " + orderNumber + "] " + item.getName() + "을(를) 만드는 중...");
+    }
+
+    public void completeItem(int orderNumber) {
         System.out.println("[주문번호: " + orderNumber + "] " + item.getName() + "을(를) 완성했습니다!");
     }
 

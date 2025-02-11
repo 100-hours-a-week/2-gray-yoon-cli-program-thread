@@ -3,28 +3,31 @@ package cafe.employee;
 import cafe.order.OrderItem;
 
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Employees {
-    private Employee employee1 = new Employee();
-    private Employee employee2 = new Employee();
+    private final int EMPLOYEE_COUNT = 2;
+    private final ExecutorService employees = Executors.newFixedThreadPool(EMPLOYEE_COUNT);
 
     public void makeOrders(ArrayList<OrderItem> orders) {
-        int mid = orders.size() / 2;
+        CountDownLatch latch = new CountDownLatch(orders.size());
 
-        employee1.setMyOrders(0, orders.subList(0, mid));
-        employee2.setMyOrders(mid, orders.subList(mid, orders.size()));
+        // 스레드 풀 사용해서 make 처리
+        for (int i = 0; i < orders.size(); i++) {
+            OrderItem item = orders.get(i);
+            Runnable task = new Task(i + 1, item, latch);
 
-        Thread thread1 = new Thread(employee1);
-        Thread thread2 = new Thread(employee2);
-
-        thread1.start();
-        thread2.start();
+            employees.execute(task);
+        }
 
         try {
-            thread1.join();
-            thread2.join();
+            latch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+
+        employees.shutdown();
     }
 }
